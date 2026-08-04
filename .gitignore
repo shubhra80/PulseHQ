@@ -216,3 +216,6 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# PulseHQ seed script intermediate output (client_id mapping, regenerated each run)
+seed/_generated/
