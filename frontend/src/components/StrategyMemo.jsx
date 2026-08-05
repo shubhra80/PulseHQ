@@ -21,8 +21,6 @@ function formatDate(iso) {
   return new Date(iso).toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" });
 }
 
-// generate_ai.py stores bullet sections pipe-delimited ("point one|point two").
-// Fall back to newlines, then a single paragraph, so this renders either way.
 function SectionBody({ text }) {
   if (!text) return <p className="text-sm text-ink-primary">Not available for this memo.</p>;
   const points = text.includes("|") ? text.split("|") : text.split("\n");
@@ -74,21 +72,21 @@ export default function StrategyMemo() {
     };
   }, []);
 
-  if (loading) return <LoadingState label="Loading strategy memo…" />;
-  if (error) return <ErrorState message={`Couldn't load the strategy memo: ${error}`} />;
+  if (loading) return <LoadingState label="Loading weekly strategy…" />;
+  if (error) return <ErrorState message={`Couldn't load the weekly strategy: ${error}`} />;
 
   return (
     <div>
       <header className="mb-6">
-        <h1 className="text-xl font-semibold text-ink-primary">Weekly Strategy Memo</h1>
+        <h1 className="text-xl font-semibold text-ink-primary">Weekly Strategy</h1>
         <p className="mt-1 text-sm text-ink-secondary">
-          {memo ? `Generated ${formatDate(memo.memo_date)}` : "No memo has been generated yet."}
+          {memo ? `Generated ${formatDate(memo.memo_date)} · Updates weekly` : "No strategy has been generated yet."}
         </p>
       </header>
 
       {!memo ? (
         <div className="rounded-xl border border-line-hairline bg-surface p-8 text-center text-sm text-ink-muted">
-          Run the AI content generation step to populate this week's strategy memo.
+          Run the AI content generation step to populate this week's strategy.
         </div>
       ) : (
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">

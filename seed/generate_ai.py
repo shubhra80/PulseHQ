@@ -109,7 +109,8 @@ def main():
         print("Strategy memo generated successfully!")
     except Exception as e:
         print(f"Error generating memo: {e}")
-    
+        import traceback
+        traceback.print_exc()    
     print("\nAll AI content generated successfully!")
 
 if __name__ == "__main__":

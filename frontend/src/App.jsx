@@ -7,8 +7,19 @@ import StrategyMemo from "./components/StrategyMemo";
 const NAV_ITEMS = [
   {
     to: "/",
-    label: "Client Health",
+    label: "Weekly Strategy",
     end: true,
+    icon: (
+      <path
+        fillRule="evenodd"
+        d="M5 2a2 2 0 00-2 2v14a2 2 0 002 2h9a2 2 0 002-2V8.828a2 2 0 00-.586-1.414l-4.828-4.828A2 2 0 009.172 2H5zm5 5a1 1 0 011-1h.01a1 1 0 010 2H11a1 1 0 01-1-1zM6 11a1 1 0 100 2h7a1 1 0 100-2H6zm0 4a1 1 0 100 2h7a1 1 0 100-2H6z"
+        clipRule="evenodd"
+      />
+    ),
+  },
+  {
+    to: "/dashboard",
+    label: "Client Health",
     icon: <path d="M3 13h4v7H3v-7zm7-6h4v13h-4V7zm7 3h4v10h-4V10z" />,
   },
   {
@@ -18,17 +29,6 @@ const NAV_ITEMS = [
       <path
         fillRule="evenodd"
         d="M4 3a1 1 0 011 1v13h13a1 1 0 110 2H4a1 1 0 01-1-1V4a1 1 0 011-1zm14.7 3.7a1 1 0 010 1.4l-5 5a1 1 0 01-1.4 0L10 10.8l-3.3 3.3a1 1 0 01-1.4-1.4l4-4a1 1 0 011.4 0l2.3 2.3 4.3-4.3a1 1 0 011.4 0z"
-        clipRule="evenodd"
-      />
-    ),
-  },
-  {
-    to: "/strategy-memo",
-    label: "Strategy Memo",
-    icon: (
-      <path
-        fillRule="evenodd"
-        d="M5 2a2 2 0 00-2 2v14a2 2 0 002 2h9a2 2 0 002-2V8.828a2 2 0 00-.586-1.414l-4.828-4.828A2 2 0 009.172 2H5zm5 5a1 1 0 011-1h.01a1 1 0 010 2H11a1 1 0 01-1-1zM6 11a1 1 0 100 2h7a1 1 0 100-2H6zm0 4a1 1 0 100 2h7a1 1 0 100-2H6z"
         clipRule="evenodd"
       />
     ),
@@ -82,10 +82,10 @@ export default function App() {
       <main className="min-w-0 flex-1">
         <div className="mx-auto max-w-7xl px-6 py-8 lg:px-10">
           <Routes>
-            <Route path="/" element={<Dashboard />} />
+            <Route path="/" element={<StrategyMemo />} />
+            <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/clients/:id" element={<ClientDetail />} />
             <Route path="/adoption-gaps" element={<AdoptionGap />} />
-            <Route path="/strategy-memo" element={<StrategyMemo />} />
           </Routes>
         </div>
       </main>
