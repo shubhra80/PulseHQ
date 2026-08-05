@@ -21,6 +21,24 @@ function formatDate(iso) {
   return new Date(iso).toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" });
 }
 
+// generate_ai.py stores bullet sections pipe-delimited ("point one|point two").
+// Fall back to newlines, then a single paragraph, so this renders either way.
+function SectionBody({ text }) {
+  if (!text) return <p className="text-sm text-ink-primary">Not available for this memo.</p>;
+  const points = text.includes("|") ? text.split("|") : text.split("\n");
+  const items = points.map((p) => p.trim()).filter(Boolean);
+  if (items.length <= 1) {
+    return <p className="whitespace-pre-line text-sm leading-relaxed text-ink-primary">{text}</p>;
+  }
+  return (
+    <ul className="list-inside list-disc space-y-1.5 text-sm leading-relaxed text-ink-primary">
+      {items.map((item, i) => (
+        <li key={i}>{item}</li>
+      ))}
+    </ul>
+  );
+}
+
 export default function StrategyMemo() {
   const [memo, setMemo] = useState(null);
   const [news, setNews] = useState([]);
@@ -80,9 +98,7 @@ export default function StrategyMemo() {
                 <h2 className="mb-2 text-sm font-semibold uppercase tracking-wide text-ink-muted">
                   {section.label}
                 </h2>
-                <p className="whitespace-pre-line text-sm leading-relaxed text-ink-primary">
-                  {memo[section.key] || "Not available for this memo."}
-                </p>
+                <SectionBody text={memo[section.key]} />
               </section>
             ))}
           </div>
