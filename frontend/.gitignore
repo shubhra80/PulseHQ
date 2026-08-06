@@ -22,3 +22,5 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+!frontend/src/lib/
+!frontend/src/lib/supabase.js
