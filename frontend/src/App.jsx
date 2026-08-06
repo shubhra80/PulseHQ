@@ -37,7 +37,7 @@ const NAV_ITEMS = [
 
 function Sidebar() {
   return (
-    <aside className="flex w-60 shrink-0 flex-col bg-surface-sidebar text-slate-200">
+    <aside className="hidden w-60 shrink-0 flex-col bg-surface-sidebar text-slate-200 md:flex">
       <div className="flex items-center gap-2 px-5 py-6">
         <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand-500 text-sm font-bold text-white">
           P
@@ -75,12 +75,51 @@ function Sidebar() {
   );
 }
 
+function MobileHeader() {
+  return (
+    <header className="flex items-center gap-2 bg-surface-sidebar px-4 py-3 text-slate-200 md:hidden">
+      <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-brand-500 text-xs font-bold text-white">
+        P
+      </div>
+      <div className="text-sm font-semibold text-white">PulseHQ</div>
+    </header>
+  );
+}
+
+function BottomNav() {
+  return (
+    <nav
+      className="fixed inset-x-0 bottom-0 z-20 flex border-t border-line-hairline bg-surface md:hidden"
+      style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
+    >
+      {NAV_ITEMS.map((item) => (
+        <NavLink
+          key={item.to}
+          to={item.to}
+          end={item.end}
+          className={({ isActive }) =>
+            `flex flex-1 flex-col items-center gap-1 py-2.5 text-[11px] font-medium ${
+              isActive ? "text-brand-600" : "text-ink-muted"
+            }`
+          }
+        >
+          <svg viewBox="0 0 20 20" className="h-5 w-5 shrink-0" fill="currentColor" aria-hidden="true">
+            {item.icon}
+          </svg>
+          {item.label}
+        </NavLink>
+      ))}
+    </nav>
+  );
+}
+
 export default function App() {
   return (
-    <div className="flex min-h-screen bg-surface-page">
+    <div className="flex min-h-screen flex-col bg-surface-page md:flex-row">
+      <MobileHeader />
       <Sidebar />
-      <main className="min-w-0 flex-1">
-        <div className="mx-auto max-w-7xl px-6 py-8 lg:px-10">
+      <main className="min-w-0 flex-1 pb-16 md:pb-0">
+        <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 sm:py-8 lg:px-10">
           <Routes>
             <Route path="/" element={<StrategyMemo />} />
             <Route path="/dashboard" element={<Dashboard />} />
@@ -89,6 +128,7 @@ export default function App() {
           </Routes>
         </div>
       </main>
+      <BottomNav />
     </div>
   );
 }
