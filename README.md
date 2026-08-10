@@ -1,35 +1,36 @@
 # PulseHQ
 
-**Live demo:** https://pulse-hq-eta.vercel.app
+**AI-powered client health intelligence platform** — built solo, no engineering background, using Claude Code end to end.
 
-Turns raw SaaS usage data into client health scores, adoption gaps, and weekly strategy memos — automatically.
+🔗 **Live:** [pulse-hq-eta.vercel.app](https://pulse-hq-eta.vercel.app)
 
 ## What it does
 
-PulseHQ is an AI-powered client intelligence platform built for SaaS teams. Instead of manually piecing together account health signals, PulseHQ does it automatically:
+PulseHQ tracks the health of 100 (fictional) SaaS client accounts and gives a product/client-success team three ways to act on that data:
 
-- **Weekly Strategy** — AI-generated strategic briefing synthesizing portfolio health, adoption gaps, and market context
-- **Client Health** — 100 accounts scored 0–100 across usage breadth, depth, and user reach
-- **Adoption Gaps** — feature-by-feature view of which clients haven't adopted key capabilities yet
+- **Weekly Strategy** — an AI-generated memo that synthesizes portfolio health against current market news, written fresh each week
+- **Client Health Dashboard** — all 100 accounts, sortable and filterable, color-coded healthy / watch / at-risk
+- **Adoption Gap Analyzer** — flags which of 8 key features (SSO, Custom Dashboards, Insights, Data Exports, Verbatim Exports, Scheduling, Load Prediction, Mobile App) each client hasn't adopted yet
 
-## Built with
+Each client's health score (0–100) is built from three weighted signals: usage breadth (30%), usage depth (40%), and user reach (30%) — modeled after how I'd actually evaluate account health in a real enterprise SaaS role.
 
-- **Claude API** — generates client insights, recommendations, and weekly strategy memos
-- **Supabase** — PostgreSQL database storing client data, health scores, and AI-generated content
-- **React + Tailwind CSS** — frontend dashboard
-- **Vercel** — deployment and hosting
-- **Claude Code** — built and shipped entirely using AI-assisted development
+## Why I built it
 
-## Why I built this
+I've spent years reviewing exactly this kind of dashboard as a product manager, but never built one myself. This was a chance to see the other side: what it actually takes to turn "client health" from a spreadsheet into a live, usable tool — data modeling, AI-generated narrative content, and a UI someone would actually open every week.
 
-I'm a Group Product Manager with 15+ years in AI-powered B2B SaaS. PulseHQ started as a way to explore what AI-native product development actually looks like in practice — not just using AI as a writing assistant, but as a core part of the architecture.
+## A deliberate product decision
 
-The same patterns here — MCP connectors, pre-generated AI content, health scoring logic, adoption analytics — apply directly to enterprise SaaS products.
+AI-generated content (the weekly strategy memo, gap analysis narratives) is **pre-generated and cached in Supabase** rather than called live on every page load. This was a cost and latency trade-off I made intentionally — most client-health content doesn't need to regenerate on every visit, so caching it keeps the app fast and cheap to run without sacrificing freshness (content refreshes on a schedule, not per-request).
 
-## Running locally
+## Tech stack
 
-1. Clone the repo
-2. Set up Supabase and run `seed/schema.sql`
-3. Run the seed scripts: `seed_clients.py`, `seed_features.py`, `seed_news.py`, `generate_ai.py`
-4. Add environment variables to `frontend/.env`
-5. `cd frontend && npm install && npm run dev`  
+- **Frontend:** React, Tailwind CSS
+- **Backend / data:** Supabase
+- **AI:** Claude API
+- **Hosting:** Vercel
+
+Mobile-responsive with bottom navigation, and includes a custom OG image for clean link previews when shared.
+
+## Status
+
+Actively maintained side project. Built and iterated on entirely with Claude Code.
