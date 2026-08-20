@@ -3,7 +3,7 @@
 **AI-powered client health intelligence platform** — built solo, no engineering background, using Claude Code end to end.
 
 🔗 **Live:** [pulse-hq-eta.vercel.app](https://pulse-hq-eta.vercel.app)
-
+            ![PulseHQ dashboard](docs/PulseHQ.png)
 ## What it does
 
 PulseHQ tracks the health of 100 (fictional) SaaS client accounts and gives a product/client-success team three ways to act on that data:
